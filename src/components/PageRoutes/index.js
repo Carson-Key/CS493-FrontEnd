@@ -1,21 +1,19 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route } from 'react-router-dom';
+import SignUp from '../../pages/SignUp';
+import SignIn from '../../pages/SignIn';
+import LoggedIn from '../../pages/LoggedIn';
 
 const PageRoutes = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <div className="h-screen flex flex-wrap content-center justify-center">
-          <div className="p-4">1</div>
-          <div className="p-4">2</div>
-          <div className="p-4">3</div>
-        </div>
+        <SignIn />
       </Route>
-      <Route path="/wrong">
-        <div className="h-screen flex flex-wrap content-center justify-center">
-          <div className="p-4">2</div>
-          <div className="p-4">3</div>
-          <div className="p-4">1</div>
-        </div>
+      <Route path="/signup">
+        <SignUp />
+      </Route>
+      <Route path="/dashboard">
+        <LoggedIn />
       </Route>
     </Switch>
   );
