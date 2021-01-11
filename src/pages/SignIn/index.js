@@ -1,4 +1,4 @@
-const SignUp = () => {
+const SignIn = () => {
   return (
     <div className="h-screen flex flex-wrap content-center justify-center">
       <div className="p-4">2</div>
@@ -8,4 +8,4 @@ const SignUp = () => {
   );
 }
 
-export default SignUp;
+export default SignIn;
