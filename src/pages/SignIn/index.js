@@ -44,9 +44,9 @@ const SignIn = () => {
     <div className="flex flex-col flex-wrap h-screen content-center justify-center">
       <TextField id="email" value={email} onChange={setEmail} placeHolder="Email" />
       <TextField id="password" value={password} onChange={setPassword} placeHolder="Password" />
-      <Button onClick={signIn}>Sign In</Button>
-      <Button onClick={signUp}>Sign Up</Button>
-      <Button onClick={googleSignIn}>Sign In With Google</Button>
+      <Button black onClick={signIn}>Sign In</Button>
+      <Button black onClick={signUp}>Sign Up</Button>
+      <Button blue onClick={googleSignIn}>Sign In With Google</Button>
     </div>
   );
 }

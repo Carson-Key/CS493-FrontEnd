@@ -28,7 +28,7 @@ const SignUp = () => {
     <div className="flex flex-col flex-wrap h-screen content-center justify-center">
       <TextField id="email" value={email} onChange={setEmail} placeHolder="Email" />
       <TextField id="password" value={password} onChange={setPassword} placeHolder="Password" />
-      <Button onClick={signUp}>Sign Up</Button>
+      <Button black onClick={signUp}>Sign Up</Button>
     </div>
   )
 }
