@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 
 const TextField = (props) => {
-  const { id, value, onChange, placeHolder } = props
+  const { id, value, onChange, placeHolder, className } = props
 
   return (
     <Fragment>
@@ -11,7 +11,7 @@ const TextField = (props) => {
         value={value}
         onChange={(event) => {onChange(event.target.value)}}
         placeholder={placeHolder}
-        className="textfield-bg-color"
+        className={"textfield-bg-color " + className}
       />
     </Fragment>
   )
