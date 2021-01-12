@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import TextField from '../../components/TextField'
 import Button from '../../components/Button'
+import { useHistory } from 'react-router-dom'
 import firebase from '../../assets/firebase.config.js';
 
 const SignIn = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const history = useHistory()
 
   const signIn = () => {
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -21,7 +23,9 @@ const SignIn = () => {
         console.log(errorString)
       })
   }
-  const signUp = () => {}
+  const signUp = () => {
+    history.push(`/signup`);
+  }
   const googleSignIn = () => {}
 
   return (
