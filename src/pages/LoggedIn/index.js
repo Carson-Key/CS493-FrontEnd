@@ -17,7 +17,7 @@ const LoggedIn = () => {
   return (
     <Container className="flex flex-col flex-wrap content-center justify-center mt-33pr h-33pr mx-33pr">
       <p>User Details</p>
-      <p>Email: {state.user.email}</p>
+      <p className="my-6">Email: {state.user.email}</p>
       <Button black onClick={logOut}>Log Out</Button>
     </Container>
   );
