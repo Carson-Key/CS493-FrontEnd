@@ -1,9 +1,36 @@
+import { useState } from 'react';
+import TextField from '../../components/TextField'
+import Button from '../../components/Button'
+import firebase from '../../assets/firebase.config.js';
+
 const SignIn = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const signIn = () => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        console.log(user)
+      })
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+
+        const errorString = errorCode + ": " + errorMessage
+
+        console.log(errorString)
+      })
+  }
+  const signUp = () => {}
+  const googleSignIn = () => {}
+
   return (
-    <div className="h-screen flex flex-wrap content-center justify-center">
-      <div className="p-4">2</div>
-      <div className="p-4">3</div>
-      <div className="p-4">1</div>
+    <div className="flex flex-col flex-wrap h-screen content-center justify-center">
+      <TextField id="email" value={email} onChange={setEmail} placeHolder="Email" />
+      <TextField id="password" value={password} onChange={setPassword} placeHolder="Password" />
+      <Button onClick={signIn}>Sign In</Button>
+      <Button onClick={signUp}>Sign Up</Button>
+      <Button onClick={googleSignIn}>Sign In With Google</Button>
     </div>
   );
 }
