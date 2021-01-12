@@ -12,8 +12,12 @@ const SignUp = () => {
     .then((user) => {
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code
+      const errorMessage = error.message
+
+      const errorString = errorCode + ": " + errorMessage
+
+      console.log(errorString)
     });
   }
 
