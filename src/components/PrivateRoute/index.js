@@ -7,11 +7,6 @@ const PrivateRoute = (props) => {
   const [state, dispatch] = useContext(AuthContext)
   const { path, children } = props
 
-  useEffect(() => {
-    console.log(state.user)
-    console.log(state.authState)
-  }, [state.user, state.authState])
-
   return (
     <Route
       path={path}
