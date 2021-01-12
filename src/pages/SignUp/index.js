@@ -23,7 +23,7 @@ const SignUp = () => {
       <TextField id="password" value={password} onChange={setPassword} placeHolder="Password" />
       <Button onClick={signUp}>Sign Up</Button>
     </div>
-  );
+  )
 }
 
 export default SignUp
