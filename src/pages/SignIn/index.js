@@ -42,10 +42,12 @@ const SignIn = () => {
 
   return (
     <div className="flex flex-col flex-wrap h-screen content-center justify-center">
-      <TextField id="email" value={email} onChange={setEmail} placeHolder="Email" />
+      <TextField id="email" className="mb-2" value={email} onChange={setEmail} placeHolder="Email" />
       <TextField id="password" value={password} onChange={setPassword} placeHolder="Password" />
-      <Button black onClick={signIn}>Sign In</Button>
-      <Button black onClick={signUp}>Sign Up</Button>
+      <div className="flex justify-between my-6">
+        <Button black onClick={signIn}>Sign In</Button>
+        <Button black onClick={signUp}>Sign Up</Button>
+      </div>
       <Button blue onClick={googleSignIn}>Sign In With Google</Button>
     </div>
   );
