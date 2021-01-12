@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-const firebaseConfig = {
+const config = {
   apiKey: "AIzaSyB3s_jxcFlGXgpH476T7h2bX7U4VU2Ttno",
   authDomain: "cs-493-hw1.firebaseapp.com",
   projectId: "cs-493-hw1",

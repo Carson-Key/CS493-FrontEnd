@@ -1,9 +1,27 @@
+import { useState } from 'react';
+import TextField from '../../components/TextField'
+import Button from '../../components/Button'
+import firebase from '../../assets/firebase.config.js';
+
 const SignUp = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const signUp = () => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((user) => {
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+  }
+
   return (
-    <div className="h-screen flex flex-wrap content-center justify-center">
-      <div className="p-4">1</div>
-      <div className="p-4">2</div>
-      <div className="p-4">3</div>
+    <div className="flex flex-col flex-wrap h-screen content-center justify-center">
+      <TextField id="email" value={email} onChange={setEmail} placeHolder="Email" />
+      <TextField id="password" value={password} onChange={setPassword} placeHolder="Password" />
+      <Button onClick={signUp}>SignUp</Button>
     </div>
   );
 }
