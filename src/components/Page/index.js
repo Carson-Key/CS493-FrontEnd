@@ -2,7 +2,7 @@ const Page = (props) => {
   const { children } = props
 
   return (
-    <div className="bg-gray-400 h-screen">
+    <div className="absolute bg-gray-400 h-screen w-screen">
       {children}
     </div>
   )
