@@ -29,7 +29,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="flex flex-col flex-wrap h-screen content-center justify-center">
+    <div className="flex flex-col flex-wrap content-center justify-center mt-33pr">
       <TextField id="email" className="mb-2" value={email} onChange={setEmail} placeHolder="Email" />
       <TextField id="password" value={password} onChange={setPassword} placeHolder="Password" />
       <div className="flex justify-between my-6">
