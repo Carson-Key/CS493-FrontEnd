@@ -4,7 +4,7 @@ import { AuthContext } from '../../helpers/AuthContext.js';
 import { authStates } from '../../helpers/authHelpers.js';
 
 const PrivateRoute = (props) => {
-  const [state, dispatc] = useContext(AuthContext)
+  const [state, dispatch] = useContext(AuthContext)
   const { path, children } = props
 
   return (
