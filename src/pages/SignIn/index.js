@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TextField from '../../components/TextField'
 import Button from '../../components/Button'
 import { useHistory } from 'react-router-dom'
+import { firebaseErrorMsg } from '../../helpers/errorHandling.js'
 import firebase from '../../assets/firebase.config.js';
 
 const SignIn = () => {
@@ -15,12 +16,7 @@ const SignIn = () => {
         console.log(user)
       })
       .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-
-        const errorString = errorCode + ": " + errorMessage
-
-        console.log(errorString)
+        firebaseErrorMsg(error)
       })
   }
   const signUp = () => {

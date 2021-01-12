@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TextField from '../../components/TextField'
 import Button from '../../components/Button'
+import { firebaseErrorMsg } from '../../helpers/errorHandling.js'
 import firebase from '../../assets/firebase.config.js';
 
 const SignUp = () => {
@@ -12,12 +13,7 @@ const SignUp = () => {
     .then((user) => {
     })
     .catch((error) => {
-      const errorCode = error.code
-      const errorMessage = error.message
-
-      const errorString = errorCode + ": " + errorMessage
-
-      console.log(errorString)
+      firebaseErrorMsg(error)
     });
   }
 
