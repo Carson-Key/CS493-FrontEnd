@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { AuthContext } from '../../helpers/AuthContext.js'
+import { AuthContext } from '../../helpers/AuthContext.js';
 import { authStates } from '../../helpers/authHelpers.js';
 
 const PrivateRoute = (props) => {
@@ -25,7 +25,7 @@ const PrivateRoute = (props) => {
         )
       }
     />
-  );
+  )
 }
 
-export default PrivateRoute;
+export default PrivateRoute
