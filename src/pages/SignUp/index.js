@@ -14,8 +14,8 @@ const SignUp = () => {
 
   const signUp = () => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((user) => {
-      dispatch({type: 'SET_USER', payload: user})
+    .then((result) => {
+      dispatch({type: 'SET_USER', payload: result.user})
       dispatch({type: 'SET_AUTHSTATE_AUTH'})
       history.push(`/dashboard`)
     })
