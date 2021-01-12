@@ -11,7 +11,7 @@ const TextField = (props) => {
         value={value}
         onChange={(event) => {onChange(event.target.value)}}
         placeholder={placeHolder}
-        className={"textfield-bg-color " + className}
+        className={"textfield-bg-color px-4 py-1 " + className}
       />
     </Fragment>
   )
