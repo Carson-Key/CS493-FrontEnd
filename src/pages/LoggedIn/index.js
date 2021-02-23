@@ -7,7 +7,7 @@ import Page from '../../components/Page';
 
 const LoggedIn = () => {
   const [artists, setArtists] = useState({})
-  const [artistsArray, setArtistsArray] = useState([])
+  const [artistsArray, setArtistsArray] = useState([1])
   const [state, dispatch] = useContext(AuthContext)
   const history = useHistory()
 
@@ -41,13 +41,21 @@ const LoggedIn = () => {
         <div>
           {
             artistsArray.map((artist, i) => {
-              return (
-                <Link key={i} to={"/artist/" + artist}>
-                  <p className="w-80pr flex justify-center text-6xl text-white bg-gray-400 py-5pr">
-                    {artist}
+              if (artist === 1) {
+                return (
+                  <p className="w-80pr flex justify-center text-6xl my-auto">
+                    Loading...
                   </p>
-                </Link>
                 )
+              } else {
+                return (
+                  <Link key={i} to={"/artist/" + artist}>
+                    <p className="w-80pr flex justify-center text-6xl text-white bg-gray-400 py-5pr">
+                      {artist}
+                    </p>
+                  </Link>
+                )
+              }
             })
           }
         </div>
