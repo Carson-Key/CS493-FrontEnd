@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
@@ -6,6 +6,8 @@ import { AuthContext } from '../../helpers/AuthContext.js';
 import Page from '../../components/Page';
 
 const LoggedIn = () => {
+  const [artists, setArtists] = useState({})
+  const [artistsArray, setArtistsArray] = useState([])
   const [state, dispatch] = useContext(AuthContext)
   const history = useHistory()
 
@@ -15,6 +17,19 @@ const LoggedIn = () => {
     history.push(`/`)
   }
 
+  useEffect(() => {
+    fetch("https://asc9ahbb60.execute-api.us-west-2.amazonaws.com")
+    .then((response) => {
+      response.json().then((data) => {
+        setArtists(data)
+        setArtistsArray(Object.keys(data))
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, [])
+
   return (
     <Page>
       <div className="flex w-screen justify-between h-10pr px-6 bg-white">
@@ -22,10 +37,13 @@ const LoggedIn = () => {
         <p className="text-2xl my-auto">Artists</p>
         <Button black onClick={logOut} className="my-auto">Log Out</Button>
       </div>
-      <Container className="flex flex-col flex-wrap content-center justify-center mt-5pr h-80pr w-95pr mx-auto">
+      <Container className="flex content-center justify-center mt-5pr h-80pr w-95pr mx-auto py-5pr">
         <div>
-          <p>User Details</p>
-          <p className="my-6">Email: {state.user.email}</p>
+          {
+            artistsArray.map((artist, i) => {
+              return (<p key={i} className="w-80pr flex justify-center text-6xl text-white bg-gray-400 py-5pr">{artist}</p>)
+            })
+          }
         </div>
       </Container>
     </Page>
