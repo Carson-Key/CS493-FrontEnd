@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { firebaseErrorMsg } from '../../helpers/errorHandling.js';
 import firebase from '../../assets/firebase.config.js';
 import { AuthContext } from '../../helpers/AuthContext.js';
+import Page from '../../components/Page';
 
 let googleProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -13,6 +14,8 @@ const SignIn = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const history = useHistory()
+
+  if (state) {}
 
   const signIn = () => {
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -41,15 +44,17 @@ const SignIn = () => {
   }
 
   return (
-    <div className="flex flex-col flex-wrap content-center justify-center mt-33pr">
-      <TextField id="email" className="mb-2" value={email} onChange={setEmail} placeHolder="Email" />
-      <TextField id="password" value={password} onChange={setPassword} placeHolder="Password" />
-      <div className="flex justify-between my-6">
-        <Button black onClick={signIn}>Sign In</Button>
-        <Button black onClick={signUp}>Sign Up</Button>
+    <Page>
+      <div className="flex flex-col flex-wrap content-center justify-center mt-33pr">
+        <TextField id="email" className="mb-2" value={email} onChange={setEmail} placeHolder="Email" />
+        <TextField id="password" value={password} onChange={setPassword} placeHolder="Password" />
+        <div className="flex justify-between my-6">
+          <Button black onClick={signIn}>Sign In</Button>
+          <Button black onClick={signUp}>Sign Up</Button>
+        </div>
+        <Button blue onClick={googleSignIn}>Sign In With Google</Button>
       </div>
-      <Button blue onClick={googleSignIn}>Sign In With Google</Button>
-    </div>
+    </Page>
   );
 }
 
