@@ -17,12 +17,12 @@ const LoggedIn = () => {
 
   return (
     <Page>
-      <div className="flex w-screen justify-between py-4 px-6 bg-white">
+      <div className="flex w-screen justify-between h-10pr px-6 bg-white">
         <p></p>
-        <p className="text-2xl">Artists</p>
-        <Button black onClick={logOut}>Log Out</Button>
+        <p className="text-2xl my-auto">Artists</p>
+        <Button black onClick={logOut} className="my-auto">Log Out</Button>
       </div>
-      <Container className="flex flex-col flex-wrap content-center justify-center mt-33pr h-33pr mx-33pr">
+      <Container className="flex flex-col flex-wrap content-center justify-center mt-5pr h-80pr w-95pr mx-auto">
         <div>
           <p>User Details</p>
           <p className="my-6">Email: {state.user.email}</p>
