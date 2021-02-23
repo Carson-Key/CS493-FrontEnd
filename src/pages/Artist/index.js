@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import Container from '../../components/Container';
 import Button from '../../components/Button';
 import { AuthContext } from '../../helpers/AuthContext.js';
 import Page from '../../components/Page';
@@ -8,9 +7,9 @@ import Page from '../../components/Page';
 const LoggedIn = () => {
   const [state, dispatch] = useContext(AuthContext)
   const history = useHistory()
-  let { artist } = useParams();
-  const [currentPage, setCurrentPage] = useState("SetAWSProfile")
-  const [currentPageComponent, setCurrentPageComponent] = useState(<></>)
+  let {artist} = useParams();
+  const [currentAlbum, setCurrentAlbum] = useState("SetAWSProfile")
+  const [currentAlbumComponent, setCurrentAlbumComponent] = useState(<></>)
 
   const logOut = () => {
     dispatch({type: 'SET_USER', payload: null})
@@ -23,7 +22,7 @@ const LoggedIn = () => {
 
   useEffect(() => {
 
-  }, [currentPage])
+  }, [currentAlbum])
 
   return (
     <Page>
@@ -44,7 +43,7 @@ const LoggedIn = () => {
           </div>
         </div>
         <div>
-          {currentPageComponent}
+          {currentAlbumComponent}
         </div>
       </div>
     </Page>
