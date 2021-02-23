@@ -5,6 +5,10 @@
 	margin-top: 33vh;
 }
 
+.mr-5pr {
+	margin-right: 5vw;
+}
+
 .mx-33pr {
 	margin-left: 33vw;
 	margin-right: 33vw;
@@ -22,6 +26,12 @@
 	height: 80vh;
 }
 
+.w-20pr {
+	width: 20vw;
+}
+.w-70pr {
+	width: 70vw;
+}
 .w-80pr {
 	width: 80vw;
 }

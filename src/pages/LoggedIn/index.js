@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
 import { AuthContext } from '../../helpers/AuthContext.js';
@@ -41,7 +41,13 @@ const LoggedIn = () => {
         <div>
           {
             artistsArray.map((artist, i) => {
-              return (<p key={i} className="w-80pr flex justify-center text-6xl text-white bg-gray-400 py-5pr">{artist}</p>)
+              return (
+                <Link key={i} to={"/artist/" + artist}>
+                  <p className="w-80pr flex justify-center text-6xl text-white bg-gray-400 py-5pr">
+                    {artist}
+                  </p>
+                </Link>
+                )
             })
           }
         </div>
