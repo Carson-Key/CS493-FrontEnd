@@ -11,7 +11,7 @@ const LoggedIn = () => {
   const history = useHistory()
   const {artist} = useParams();
   const [currentAlbum, setCurrentAlbum] = useState(Object.keys(artistState.artists[artist])[0])
-  const [currentAlbumComponent, setCurrentAlbumComponent] = useState([1])
+  const [currentAlbumComponent, setCurrentAlbumComponent] = useState([])
   const [artistObject, setArtistObject] = useState({})
   const [songs, setSongs] = useState({})
   const [albums, setAlbums] = useState([])
@@ -41,18 +41,20 @@ const LoggedIn = () => {
     const tempSongsObject = {}
     albums.forEach((album, i) => {
       tempSongsObject[album] = Object.keys(artistObject[album])
-      if (i === 0 && currentAlbumComponent[0] === 1) {
+      if (i === 0) {
         setCurrentAlbumComponent(tempSongsObject[album])
       }
     })
-    setSongs(tempSongsObject)
-  }, [])
+    if (Object.keys(songs).length === 0) {
+      setSongs(tempSongsObject)
+    }
+  }, [songs])
 
   return (
     <Page>
       <div className="flex w-screen justify-between h-10pr px-6 bg-white">
         <Button onClick={back}>Back</Button>
-        <p className="text-2xl my-auto">Artists</p>
+        <p className="text-2xl my-auto">Artist: {artist}</p>
         <Button black onClick={logOut} className="my-auto">Log Out</Button>
       </div>
       <div className="flex justify-around mt-5pr w-95pr mx-auto">
