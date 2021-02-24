@@ -24,10 +24,10 @@ const LoggedIn = () => {
 
   useEffect(() => {
     if (!artistState.artists) {
-      fetch("https://asc9ahbb60.execute-api.us-west-2.amazonaws.com")
+      fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/artistList")
       .then((response) => {
         response.json().then((data) => {
-          artistDispatch({type: 'SET_ARTIST', payload: data})
+          artistDispatch({type: 'SET_ARTISTS', payload: data})
           setArtistsArray(Object.keys(data))
         })
       })
