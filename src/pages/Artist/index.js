@@ -10,12 +10,14 @@ const LoggedIn = () => {
   const [artistState, artistDispatch] = useContext(ArtistContext)
   const history = useHistory()
   const {artist} = useParams();
-  const [currentAlbum, setCurrentAlbum] = useState("SetAWSProfile")
-  const [currentAlbumComponent, setCurrentAlbumComponent] = useState(<></>)
+  const [currentAlbum, setCurrentAlbum] = useState(Object.keys(artistState.artists[artist])[0])
+  const [currentAlbumComponent, setCurrentAlbumComponent] = useState([1])
+  const [artistObject, setArtistObject] = useState({})
+  const [songs, setSongs] = useState({})
   const [albums, setAlbums] = useState([])
 
-    // To satisfy the compiler
-    if (authState) {}
+  // To satisfy the compiler
+  if (authState) {}
 
   const logOut = () => {
     authDispatch({type: 'SET_USER', payload: null})
@@ -27,13 +29,24 @@ const LoggedIn = () => {
     history.push(`/dashboard`)
   }
 
-  useEffect(() => {
-    setAlbums(Object.keys(artistState.artists[artist]))
-  }, [artistState, artist])
+  const switchActiveAlbum = (album) => {
+    setCurrentAlbum(album)
+    setCurrentAlbumComponent(songs[album])
+  }
 
   useEffect(() => {
-    // console.log(artistState)
-  }, [currentAlbum, artistState])
+    setArtistObject(artistState.artists[artist])
+    setAlbums(Object.keys(artistState.artists[artist]))
+
+    const tempSongsObject = {}
+    albums.forEach((album, i) => {
+      tempSongsObject[album] = Object.keys(artistObject[album])
+      if (i === 0 && currentAlbumComponent[0] === 1) {
+        setCurrentAlbumComponent(tempSongsObject[album])
+      }
+    })
+    setSongs(tempSongsObject)
+  }, [])
 
   return (
     <Page>
@@ -50,7 +63,11 @@ const LoggedIn = () => {
               {
                 albums.map((album, i) => {
                   return (
-                    <Button key={i} className="text-2xl h-10pr w-full border-b-2 border-fuchsia-600">{album}</Button>
+                    <Button key={i} className="text-2xl h-10pr w-full border-b-2 border-fuchsia-600" onClick={() => {
+                      switchActiveAlbum(album)
+                    }}>
+                      {album}
+                    </Button>
                   )
                 })
               }
@@ -58,11 +75,14 @@ const LoggedIn = () => {
           </div>
           <div className="bg-white h-80pr w-70pr">
             <p className="font-bold mt-4 mb-1 text-center">Songs</p>
-
+            {
+              currentAlbumComponent.map((song, i) => {
+                return (
+                  <Button key={i} className="text-2xl h-10pr w-full border-b-2 border-fuchsia-600">{song}</Button>
+                )
+              })
+            }
           </div>
-        </div>
-        <div>
-          {currentAlbumComponent}
         </div>
       </div>
     </Page>

@@ -52,7 +52,7 @@ const LoggedIn = () => {
             artistsArray.map((artist, i) => {
               if (artist === 1) {
                 return (
-                  <p className="w-80pr flex justify-center text-6xl my-auto">
+                  <p key={i} className="w-80pr flex justify-center text-6xl my-auto">
                     Loading...
                   </p>
                 )
