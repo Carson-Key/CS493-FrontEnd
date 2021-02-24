@@ -1,11 +1,14 @@
 import PageRoutes from '../PageRoutes';
-import Store from '../../helpers/AuthContext.js';
+import AuthStore from '../../helpers/AuthContext.js';
+import ArtistStore from '../../helpers/ArtistContext.js';
 
 const Auth = (props) => {
   return (
-    <Store>
-      <PageRoutes />
-    </Store>
+    <AuthStore>
+      <ArtistStore>
+        <PageRoutes />
+      </ArtistStore>
+    </AuthStore>
   )
 }
 

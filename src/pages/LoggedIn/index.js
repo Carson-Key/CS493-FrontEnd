@@ -3,32 +3,41 @@ import { useHistory, Link } from 'react-router-dom';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
 import { AuthContext } from '../../helpers/AuthContext.js';
+import { ArtistContext } from '../../helpers/ArtistContext.js';
 import Page from '../../components/Page';
 
 const LoggedIn = () => {
-  const [artists, setArtists] = useState({})
   const [artistsArray, setArtistsArray] = useState([1])
-  const [state, dispatch] = useContext(AuthContext)
+  const [authState, authDispatch] = useContext(AuthContext)
+  const [artistState, artistDispatch] = useContext(ArtistContext)
   const history = useHistory()
 
+  // To satisfy the compiler
+  if (authState) {}
+  if (artistState) {}
+
   const logOut = () => {
-    dispatch({type: 'SET_USER', payload: null})
-    dispatch({type: 'SET_AUTHSTATE_UNAUTH'})
+    authDispatch({type: 'SET_USER', payload: null})
+    authDispatch({type: 'SET_AUTHSTATE_UNAUTH'})
     history.push(`/`)
   }
 
   useEffect(() => {
-    fetch("https://asc9ahbb60.execute-api.us-west-2.amazonaws.com")
-    .then((response) => {
-      response.json().then((data) => {
-        setArtists(data)
-        setArtistsArray(Object.keys(data))
+    if (!artistState.artists) {
+      fetch("https://asc9ahbb60.execute-api.us-west-2.amazonaws.com")
+      .then((response) => {
+        response.json().then((data) => {
+          artistDispatch({type: 'SET_ARTIST', payload: data})
+          setArtistsArray(Object.keys(data))
+        })
       })
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }, [])
+      .catch((error) => {
+        console.log(error)
+      })
+    } else {
+      setArtistsArray(Object.keys(artistState.artists))
+    }
+  }, [artistDispatch, artistState])
 
   return (
     <Page>
