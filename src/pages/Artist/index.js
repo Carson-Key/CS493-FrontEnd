@@ -82,7 +82,15 @@ const LoggedIn = () => {
                 const tempArtist = artistState.artists[artist]
                 const tempAlbum = tempArtist[currentAlbum]
                 return (
-                  <Button key={i} className="text-2xl h-10pr w-full border-b-2 border-fuchsia-600">{tempAlbum[song].title}</Button>
+                  <div key={i} className="block text-2xl h-10pr w-full border-b-2 border-fuchsia-600">
+                    <center>
+                      <p>{tempAlbum[song].title}</p>
+                      <audio controls>
+                        <source src={tempAlbum[song].url} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                      </audio>
+                    </center>
+                  </div>
                 )
               })
             }
