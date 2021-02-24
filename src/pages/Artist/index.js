@@ -14,6 +14,9 @@ const LoggedIn = () => {
   const [currentAlbumComponent, setCurrentAlbumComponent] = useState(<></>)
   const [albums, setAlbums] = useState([])
 
+    // To satisfy the compiler
+    if (authState) {}
+
   const logOut = () => {
     authDispatch({type: 'SET_USER', payload: null})
     authDispatch({type: 'SET_AUTHSTATE_UNAUTH'})
