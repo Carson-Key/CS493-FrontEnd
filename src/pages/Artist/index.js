@@ -79,8 +79,10 @@ const LoggedIn = () => {
             <p className="font-bold mt-4 mb-1 text-center">Songs</p>
             {
               currentAlbumComponent.map((song, i) => {
+                const tempArtist = artistState.artists[artist]
+                const tempAlbum = tempArtist[currentAlbum]
                 return (
-                  <Button key={i} className="text-2xl h-10pr w-full border-b-2 border-fuchsia-600">{song}</Button>
+                  <Button key={i} className="text-2xl h-10pr w-full border-b-2 border-fuchsia-600">{tempAlbum[song].title}</Button>
                 )
               })
             }
