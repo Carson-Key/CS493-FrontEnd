@@ -47,7 +47,7 @@ const LoggedIn = () => {
         <Button black onClick={logOut} className="my-auto">Log Out</Button>
       </div>
       <Container className="flex content-center justify-center mt-5pr h-80pr w-95pr mx-auto py-5pr">
-        <div>
+        <div className="overflow-auto">
           {
             artistsArray.map((artist, i) => {
               if (artist === 1) {
@@ -59,7 +59,7 @@ const LoggedIn = () => {
               } else {
                 return (
                   <Link key={i} to={"/artist/" + artist}>
-                    <p className="w-80pr flex justify-center text-6xl text-white bg-gray-400 py-5pr">
+                    <p className="w-80pr flex justify-center text-6xl text-white bg-gray-400 py-5pr mt-4">
                       {artist}
                     </p>
                   </Link>
