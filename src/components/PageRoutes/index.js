@@ -3,6 +3,7 @@ import PrivateRoute from '../PrivateRoute';
 import SignUp from '../../pages/SignUp';
 import SignIn from '../../pages/SignIn';
 import LoggedIn from '../../pages/LoggedIn';
+import Artist from '../../pages/Artist';
 
 const PageRoutes = () => {
   return (
@@ -15,6 +16,9 @@ const PageRoutes = () => {
       </Route>
       <PrivateRoute path="/dashboard">
         <LoggedIn />
+      </PrivateRoute>
+      <PrivateRoute path="/artist/:artist">
+        <Artist />
       </PrivateRoute>
     </Switch>
   );

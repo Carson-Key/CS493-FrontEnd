@@ -1,5 +1,12 @@
+.mt-5pr {
+	margin-top: 5vh;
+}
 .mt-33pr {
 	margin-top: 33vh;
+}
+
+.mr-5pr {
+	margin-right: 5vw;
 }
 
 .mx-33pr {
@@ -7,6 +14,27 @@
 	margin-right: 33vw;
 }
 
-.h-33pr {
-	height: 33vh;
+.py-5pr {
+	padding-top: 5vh;
+	padding-bottom: 5vh;
+}
+
+.h-10pr {
+	height: 10vh;
+}
+.h-80pr {
+	height: 80vh;
+}
+
+.w-20pr {
+	width: 20vw;
+}
+.w-70pr {
+	width: 70vw;
+}
+.w-80pr {
+	width: 80vw;
+}
+.w-95pr {
+	width: 95vw;
 }

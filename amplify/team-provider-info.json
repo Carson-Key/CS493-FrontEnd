@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-carsonkeyfirebaseaut-dev-134021-authRole",
+      "UnauthRoleArn": "arn:aws:iam::243732450758:role/amplify-carsonkeyfirebaseaut-dev-134021-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::243732450758:role/amplify-carsonkeyfirebaseaut-dev-134021-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-carsonkeyfirebaseaut-dev-134021-deployment",
+      "UnauthRoleName": "amplify-carsonkeyfirebaseaut-dev-134021-unauthRole",
+      "StackName": "amplify-carsonkeyfirebaseaut-dev-134021",
+      "StackId": "arn:aws:cloudformation:us-west-2:243732450758:stack/amplify-carsonkeyfirebaseaut-dev-134021/bc3648b0-761f-11eb-9e2d-02bec35fcb4f",
+      "AmplifyAppId": "d3oe2oldsitysm"
+    }
+  }
+}
