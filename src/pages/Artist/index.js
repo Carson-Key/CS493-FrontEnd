@@ -4,6 +4,7 @@ import Button from '../../components/Button';
 import { AuthContext } from '../../helpers/AuthContext.js';
 import { ArtistContext } from '../../helpers/ArtistContext.js';
 import Page from '../../components/Page';
+import firebase from '../../assets/firebase.config.js';
 
 const LoggedIn = () => {
   const [authState, authDispatch] = useContext(AuthContext)
@@ -61,24 +62,28 @@ const LoggedIn = () => {
         album: currentAlbum,
         artist: artist
       })
-      fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/play", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: body
-      })
-      .then((response) => {
-        response.json().then((data) => {
-          console.log(data)
+      firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+        fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/play", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: idToken,
+          },
+          body: body
         })
-      })
-      .catch((error) => {
+        .then((response) => {
+          response.json().then((data) => {
+            console.log(data)
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        song.play()
+        setPlay(false)
+      }).catch(function(error) {
         console.log(error)
-      })
-      song.play()
-      setPlay(false)
-      
+      });
     }
   }
 
