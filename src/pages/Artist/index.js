@@ -51,13 +51,34 @@ const LoggedIn = () => {
     }
   }, [songs])
 
-  const playSong = (song) => {
+  const playSong = (song, artist, currentAlbum, songTitle) => {
     if (play) {
       song.pause()
       setPlay(true)
     } else {
+      const body = JSON.stringify({
+        song: songTitle,
+        album: currentAlbum,
+        artist: artist
+      })
+      fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/play", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: body
+      })
+      .then((response) => {
+        response.json().then((data) => {
+          console.log(data)
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
       song.play()
       setPlay(false)
+      
     }
   }
 
@@ -96,7 +117,7 @@ const LoggedIn = () => {
                   <div key={i} className="block text-2xl h-10pr w-full border-b-2 border-fuchsia-600">
                     <center>
                       <Button black onClick={() => {
-                        playSong(tempAlbum[song].songObject)
+                        playSong(tempAlbum[song].songObject, artist, currentAlbum, tempAlbum[song].title)
                       }}>Play -- {tempAlbum[song].title}</Button>
                     </center>
                   </div>
