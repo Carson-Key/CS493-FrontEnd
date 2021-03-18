@@ -4,6 +4,7 @@ import Button from '../../components/Button';
 import { AuthContext } from '../../helpers/AuthContext.js';
 import { ArtistContext } from '../../helpers/ArtistContext.js';
 import Page from '../../components/Page';
+import firebase from '../../assets/firebase.config.js';
 
 const LoggedIn = () => {
   const [authState, authDispatch] = useContext(AuthContext)
@@ -15,6 +16,7 @@ const LoggedIn = () => {
   const [artistObject, setArtistObject] = useState({})
   const [songs, setSongs] = useState({})
   const [albums, setAlbums] = useState([])
+  const [play, setPlay] = useState(false)
 
   // To satisfy the compiler
   if (authState) {}
@@ -50,6 +52,41 @@ const LoggedIn = () => {
     }
   }, [songs])
 
+  const playSong = (song, artist, currentAlbum, songTitle) => {
+    if (play) {
+      song.pause()
+      setPlay(true)
+    } else {
+      const body = JSON.stringify({
+        song: songTitle,
+        album: currentAlbum,
+        artist: artist
+      })
+      firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+        fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/play", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: idToken,
+          },
+          body: body
+        })
+        .then((response) => {
+          response.json().then((data) => {
+            console.log(data)
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        song.play()
+        setPlay(false)
+      }).catch(function(error) {
+        console.log(error)
+      });
+    }
+  }
+
   return (
     <Page>
       <div className="flex w-screen justify-between h-10pr px-6 bg-white">
@@ -84,11 +121,9 @@ const LoggedIn = () => {
                 return (
                   <div key={i} className="block text-2xl h-10pr w-full border-b-2 border-fuchsia-600">
                     <center>
-                      <p>{tempAlbum[song].title}</p>
-                      <audio controls>
-                        <source src={tempAlbum[song].url} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                      </audio>
+                      <Button black onClick={() => {
+                        playSong(tempAlbum[song].songObject, artist, currentAlbum, tempAlbum[song].title)
+                      }}>Play -- {tempAlbum[song].title}</Button>
                     </center>
                   </div>
                 )

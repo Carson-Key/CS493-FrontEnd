@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import { AuthContext } from '../../helpers/AuthContext.js';
 import { ArtistContext } from '../../helpers/ArtistContext.js';
 import Page from '../../components/Page';
+import firebase from '../../assets/firebase.config.js';
 
 const LoggedIn = () => {
   const [artistsArray, setArtistsArray] = useState([1])
@@ -19,21 +20,43 @@ const LoggedIn = () => {
   const logOut = () => {
     authDispatch({type: 'SET_USER', payload: null})
     authDispatch({type: 'SET_AUTHSTATE_UNAUTH'})
+    artistDispatch({type: 'SET_ARTISTS', payload: null})
     history.push(`/`)
   }
 
   useEffect(() => {
     if (!artistState.artists) {
-      fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/artistList")
-      .then((response) => {
-        response.json().then((data) => {
-          artistDispatch({type: 'SET_ARTISTS', payload: data})
-          setArtistsArray(Object.keys(data))
+      firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+        fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/artistList", {
+          headers: {
+            authorization: idToken,
+          }
         })
-      })
-      .catch((error) => {
+        .then((response) => {
+          response.json().then((data) => {
+            const dataArray = Object.keys(data.artists)
+            dataArray.forEach((artist) => {
+              const artistArray = Object.keys(data.artists[artist])
+              const artistObject = data.artists[artist]
+              artistArray.forEach((album) => {
+                const albumArray = Object.keys(artistObject[album])
+                const albumObject = artistObject[album]
+                albumArray.forEach((song) => {
+                  albumObject[song].songObject = new Audio(albumObject[song].url)
+                })
+              })
+            })
+            artistDispatch({type: 'SET_ARTISTS', payload: data.artists})
+            setArtistsArray(Object.keys(data.artists))
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+          setArtistsArray([2])
+        })
+      }).catch(function(error) {
         console.log(error)
-      })
+      });
     } else {
       setArtistsArray(Object.keys(artistState.artists))
     }
@@ -54,6 +77,12 @@ const LoggedIn = () => {
                 return (
                   <p key={i} className="w-80pr flex justify-center text-6xl my-auto">
                     Loading...
+                  </p>
+                )
+              } else if (artist === 2) {
+                return (
+                  <p key={i} className="w-80pr flex justify-center text-6xl my-auto">
+                    401, not Authorized
                   </p>
                 )
               } else {
