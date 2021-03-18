@@ -24,13 +24,17 @@ const LoggedIn = () => {
 
   useEffect(() => {
     if (!artistState.artists) {
-      fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/artistList")
+      fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/artistList", {
+        headers: {
+          authorization: "hello",
+        }
+      })
       .then((response) => {
         response.json().then((data) => {
-          const dataArray = Object.keys(data)
+          const dataArray = Object.keys(data.artists)
           dataArray.forEach((artist) => {
-            const artistArray = Object.keys(data[artist])
-            const artistObject = data[artist]
+            const artistArray = Object.keys(data.artists[artist])
+            const artistObject = data.artists[artist]
             artistArray.forEach((album) => {
               const albumArray = Object.keys(artistObject[album])
               const albumObject = artistObject[album]
@@ -39,8 +43,8 @@ const LoggedIn = () => {
               })
             })
           })
-          artistDispatch({type: 'SET_ARTISTS', payload: data})
-          setArtistsArray(Object.keys(data))
+          artistDispatch({type: 'SET_ARTISTS', payload: data.artists})
+          setArtistsArray(Object.keys(data.artists))
         })
       })
       .catch((error) => {
