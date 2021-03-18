@@ -27,6 +27,18 @@ const LoggedIn = () => {
       fetch("https://q2h6cilfdi.execute-api.us-west-2.amazonaws.com/dev/artistList")
       .then((response) => {
         response.json().then((data) => {
+          const dataArray = Object.keys(data)
+          dataArray.forEach((artist) => {
+            const artistArray = Object.keys(data[artist])
+            const artistObject = data[artist]
+            artistArray.forEach((album) => {
+              const albumArray = Object.keys(artistObject[album])
+              const albumObject = artistObject[album]
+              albumArray.forEach((song) => {
+                albumObject[song].songObject = new Audio(albumObject[song].url)
+              })
+            })
+          })
           artistDispatch({type: 'SET_ARTISTS', payload: data})
           setArtistsArray(Object.keys(data))
         })

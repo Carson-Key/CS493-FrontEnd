@@ -15,6 +15,7 @@ const LoggedIn = () => {
   const [artistObject, setArtistObject] = useState({})
   const [songs, setSongs] = useState({})
   const [albums, setAlbums] = useState([])
+  const [play, setPlay] = useState(false)
 
   // To satisfy the compiler
   if (authState) {}
@@ -50,6 +51,16 @@ const LoggedIn = () => {
     }
   }, [songs])
 
+  const playSong = (song) => {
+    if (play) {
+      song.pause()
+      setPlay(true)
+    } else {
+      song.play()
+      setPlay(false)
+    }
+  }
+
   return (
     <Page>
       <div className="flex w-screen justify-between h-10pr px-6 bg-white">
@@ -84,11 +95,9 @@ const LoggedIn = () => {
                 return (
                   <div key={i} className="block text-2xl h-10pr w-full border-b-2 border-fuchsia-600">
                     <center>
-                      <p>{tempAlbum[song].title}</p>
-                      <audio controls>
-                        <source src={tempAlbum[song].url} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                      </audio>
+                      <Button black onClick={() => {
+                        playSong(tempAlbum[song].songObject)
+                      }}>Play -- {tempAlbum[song].title}</Button>
                     </center>
                   </div>
                 )
