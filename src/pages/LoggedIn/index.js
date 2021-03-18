@@ -20,6 +20,7 @@ const LoggedIn = () => {
   const logOut = () => {
     authDispatch({type: 'SET_USER', payload: null})
     authDispatch({type: 'SET_AUTHSTATE_UNAUTH'})
+    artistDispatch({type: 'SET_ARTISTS', payload: null})
     history.push(`/`)
   }
 
@@ -51,6 +52,7 @@ const LoggedIn = () => {
         })
         .catch((error) => {
           console.log(error)
+          setArtistsArray([2])
         })
       }).catch(function(error) {
         console.log(error)
@@ -75,6 +77,12 @@ const LoggedIn = () => {
                 return (
                   <p key={i} className="w-80pr flex justify-center text-6xl my-auto">
                     Loading...
+                  </p>
+                )
+              } else if (artist === 2) {
+                return (
+                  <p key={i} className="w-80pr flex justify-center text-6xl my-auto">
+                    401, not Authorized
                   </p>
                 )
               } else {
